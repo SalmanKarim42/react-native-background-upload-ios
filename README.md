@@ -1,4 +1,4 @@
-# Modified code from https://github.com/Vydia/react-native-background-upload.
+# Modified code from https://github.com/Vydia/react-native-background-upload-ios.
 
 iOS only background uploader which supports network requests to continue even when the app goes to background. Supports both raw and multipart uploads (file size limits might apply).
 In addition, provides methods to request more background time to the OS in order to continue running for longer periods of time. Alternatively,the app can just be waken up after the upload is done. Note that if both features are combined, background time/wake ups will be reduced.
@@ -8,7 +8,7 @@ In addition, provides methods to request more background time to the OS in order
 
 ## 1. Install package
 
-Add to packages.json: "react-native-background-upload": "github:cristianoccazinsp/react-native-background-upload"
+Add to packages.json: "react-native-background-upload-ios": "github:cristianoccazinsp/react-native-background-upload-ios"
 
 
 ## 2. Link Native Code
@@ -16,13 +16,13 @@ Add to packages.json: "react-native-background-upload": "github:cristianoccazins
 ### Automatic Native Library Linking
 
 NO LONGER NEEDED. RN 0.60 will auto link. Header import is still needed if we want to listen to events
-`react-native link react-native-background-upload`
+`react-native link react-native-background-upload-ios`
 
 
 # Usage
 
 ```js
-import Upload from 'react-native-background-upload'
+import Upload from 'react-native-background-upload-ios'
 
 const options = {
   url: 'https://myservice.com/path/to/post',
@@ -60,7 +60,7 @@ Upload.startUpload(options).then((uploadId) => {
 Just set the `type` option to `multipart` and set the `field` option.  Example:
 
 ```js
-import RNBackgroundUpload from 'react-native-background-upload';
+import RNBackgroundUpload from 'react-native-background-upload-ios';
 
 const resolveUpload = function(uploadId){
   return new Promise((resolve, reject) => {
@@ -163,7 +163,7 @@ Here are a few common situations and how to handle them:
  - Uploads are finished (completed, error or cancelled) and your app needs to upload some more. You call `startUpload` a number of times and add your listeners. You should call `canSuspendIfBackground` after the uploads start but not wait for them to finish. You also need to call `canSuspendIfBackground` after you have received the events, even if some uploads are cancelled or fail:
 
 ```javascript
-import { addListener, startUpload, canSuspendIfBackground } from 'react-native-background-upload';
+import { addListener, startUpload, canSuspendIfBackground } from 'react-native-background-upload-ios';
 
 function listenForUploadCompletion(uploadId) {
   return new Promise((resolve, reject) => {
@@ -215,7 +215,7 @@ This means you can do extra work in the background, like make network calls or u
 Here is a JS example:
 
 ```javascript
-import RNBackgroundUpload from 'react-native-background-upload';
+import RNBackgroundUpload from 'react-native-background-upload-ios';
 
 async function uploadFile(url, fileURI) {
   const uploadId = await RNBackgroundUpload.startUpload({ url, path: fileURI, method: 'POST' });
@@ -258,7 +258,7 @@ If your app is dead when uploads complete (force-closed by the user via the app 
 Use this if background events are not enough and you need even more time.
 
 ```js
-import RNBackgroundUpload from 'react-native-background-upload';
+import RNBackgroundUpload from 'react-native-background-upload-ios';
 
 // Request background time. Do not call this on app suspend/resume since it might be already too late.
 let taskId = await RNBackgroundUpload.beginBackgroundTask();
@@ -286,4 +286,4 @@ if(bgExpiredRelease){
 
 ## Gratitude
 
-Thanks to https://github.com/Vydia/react-native-background-upload to provide the main code and ideas.
+Thanks to https://github.com/Vydia/react-native-background-upload-ios to provide the main code and ideas.
